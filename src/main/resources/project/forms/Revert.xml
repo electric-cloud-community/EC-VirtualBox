@@ -1,0 +1,35 @@
+<editor>
+    <help>/commander/pages/@PLUGIN_NAME@/@PLUGIN_KEY@_help?s=Administration&amp;ss=Plugins#Revert</help>
+    <formElement>
+        <label>Path to VBoxManage</label>
+        <property>vboxmanage_location</property>
+        <value></value>
+        <documentation>Location of VBoxManage.</documentation>
+        <required>0</required>
+        <type>entry</type>
+    </formElement>
+    <formElement>
+        <label>VM Name</label>
+        <property>virtualbox_vmname</property>
+        <value></value>
+        <documentation>Name of the virtual machine to revert.</documentation>
+        <required>1</required>
+        <type>entry</type>
+    </formElement>
+    <formElement>
+        <label>Snapshot name</label>
+        <property>virtualbox_snapshot</property>
+        <value></value>
+        <documentation>Name of the snapshot to be restored.</documentation>
+        <required>1</required>
+        <type>entry</type>
+    </formElement>
+    <formElement>
+        <label>Timeout</label>
+        <property>virtualbox_timeout</property>
+        <value></value>
+        <documentation>Timeout for the step execution in minutes. Blank means no timeout.</documentation>
+        <required>0</required>
+        <type>entry</type>
+    </formElement>
+</editor>

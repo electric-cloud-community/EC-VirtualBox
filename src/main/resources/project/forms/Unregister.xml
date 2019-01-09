@@ -1,0 +1,37 @@
+<editor>
+    <help>/commander/pages/@PLUGIN_NAME@/@PLUGIN_KEY@_help?s=Administration&amp;ss=Plugins#Unregister</help>
+    <formElement>
+        <label>Path to VBoxManage</label>
+        <property>vboxmanage_location</property>
+        <value></value>
+        <documentation>Location of VBoxManage.</documentation>
+        <required>0</required>
+        <type>entry</type>
+    </formElement>
+    <formElement>
+        <label>VM Name</label>
+        <property>virtualbox_vmname</property>
+        <value></value>
+        <documentation>Name of the virtual machine to unregister.</documentation>
+        <required>1</required>
+        <type>entry</type>
+    </formElement>
+    <formElement>
+        <label>Delete Files</label>
+        <property>virtualbox_delete_files</property>
+        <value></value>
+        <documentation>Flag to specify whether or not to delete files associated to the virtual machine.</documentation>
+        <required>0</required>
+        <type>checkbox</type>
+        <checkedValue>1</checkedValue>
+        <uncheckedValue>0</uncheckedValue>
+    </formElement>
+    <formElement>
+        <label>Timeout</label>
+        <property>virtualbox_timeout</property>
+        <value></value>
+        <documentation>Timeout for the step execution in minutes. Blank means no timeout.</documentation>
+        <required>0</required>
+        <type>entry</type>
+    </formElement>
+</editor>

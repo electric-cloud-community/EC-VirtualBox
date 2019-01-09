@@ -1,0 +1,53 @@
+<editor>
+    <help>/commander/pages/@PLUGIN_NAME@/@PLUGIN_KEY@_help?s=Administration&amp;ss=Plugins#PowerOn</help>
+    <formElement>
+        <label>Path to VBoxManage</label>
+        <property>vboxmanage_location</property>
+        <value></value>
+        <documentation>Location of VBoxManage.</documentation>
+        <required>0</required>
+        <type>entry</type>
+    </formElement>
+    <formElement>
+        <label>VM Name</label>
+        <property>virtualbox_vmname</property>
+        <value></value>
+        <documentation>Name of the virtual machine to power on.</documentation>
+        <required>1</required>
+        <type>entry</type>
+    </formElement>
+    <formElement>
+        <label>Create Resources</label>
+        <property>virtualbox_create_resource</property>
+        <value></value>
+        <documentation>Flag to specify whether or not to create an ElectricCommander resource for the powered on virtual machine.</documentation>
+        <required>0</required>
+        <type>checkbox</type>
+        <checkedValue>1</checkedValue>
+        <uncheckedValue>0</uncheckedValue>
+    </formElement>
+    <formElement>
+        <label>Workspace</label>
+        <property>virtualbox_workspace</property>
+        <value></value>
+        <documentation>The ElectricCommander workspace the created resource should use.</documentation>
+        <required>0</required>
+        <type>entry</type>
+    </formElement>
+    <formElement>
+        <label>Pool</label>
+        <property>virtualbox_pools</property>
+        <value></value>
+        <documentation>The ElectricCommander resource pool names to be associated with the created resource.</documentation>
+        <required>0</required>
+        <type>entry</type>
+    </formElement>
+    <formElement>
+        <label>Timeout</label>
+        <property>virtualbox_timeout</property>
+        <value></value>
+        <documentation>Timeout for the step execution in minutes. Blank means no timeout.</documentation>
+        <required>0</required>
+        <type>entry</type>
+    </formElement>
+</editor>

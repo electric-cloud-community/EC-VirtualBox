@@ -1,0 +1,315 @@
+# -*-Perl-*-
+
+# virtualbox.ntest -
+#
+# System tests for EC-VirtualBox plugin
+#
+# Copyright (c) 2005-2011 Electric Cloud, Inc.
+# All rights reserved
+
+use strict;
+use ECTest;
+use ECSelenium;
+
+# read in setup and tests that are common to all plugins 
+# system tests
+require "$::gTestFileDir/../../EC-VirtualBox/systemtest/ntest.common";
+
+
+ntest 'check-components-present', {}, sub {
+    # Check that the plugin contains required components
+    my $xpath;
+    $xpath = $::N->getSteps("$::gPlugin_name","PowerOn");
+    assertOK($xpath,"PowerOn");
+    assertEq("SetTimelimit", $xpath->findvalue("//step[1]/stepName"), "step 1 is SetTimelimit");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","PowerOn");
+    assertOK($xpath,"PowerOn");
+    assertEq("PowerOn", $xpath->findvalue("//step[2]/stepName"), "step 2 is PowerOn");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","PowerOff");
+    assertOK($xpath,"PowerOff");
+    assertEq("SetTimelimit", $xpath->findvalue("//step[1]/stepName"), "step 1 is SetTimelimit");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","PowerOff");
+    assertOK($xpath,"PowerOff");
+    assertEq("PowerOff", $xpath->findvalue("//step[2]/stepName"), "step 2 is PowerOff");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Pause");
+    assertOK($xpath,"Pause");
+    assertEq("SetTimelimit", $xpath->findvalue("//step[1]/stepName"), "step 1 is SetTimelimit");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Pause");
+    assertOK($xpath,"Pause");
+    assertEq("Pause", $xpath->findvalue("//step[2]/stepName"), "step 2 is Pause");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Resume");
+    assertOK($xpath,"Resume");
+    assertEq("SetTimelimit", $xpath->findvalue("//step[1]/stepName"), "step 1 is SetTimelimit");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Resume");
+    assertOK($xpath,"Resume");
+    assertEq("Resume", $xpath->findvalue("//step[2]/stepName"), "step 2 is Resume");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Snapshot");
+    assertOK($xpath,"Snapshot");
+    assertEq("SetTimelimit", $xpath->findvalue("//step[1]/stepName"), "step 1 is SetTimelimit");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Snapshot");
+    assertOK($xpath,"Snapshot");
+    assertEq("Snapshot", $xpath->findvalue("//step[2]/stepName"), "step 2 is Snapshot");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Revert");
+    assertOK($xpath,"Revert");
+    assertEq("SetTimelimit", $xpath->findvalue("//step[1]/stepName"), "step 1 is SetTimelimit");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Revert");
+    assertOK($xpath,"Revert");
+    assertEq("Revert", $xpath->findvalue("//step[2]/stepName"), "step 2 is Revert");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Register");
+    assertOK($xpath,"Register");
+    assertEq("SetTimelimit", $xpath->findvalue("//step[1]/stepName"), "step 1 is SetTimelimit");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Register");
+    assertOK($xpath,"Register");
+    assertEq("Register", $xpath->findvalue("//step[2]/stepName"), "step 2 is Register");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Unregister");
+    assertOK($xpath,"Unregister");
+    assertEq("SetTimelimit", $xpath->findvalue("//step[1]/stepName"), "step 1 is SetTimelimit");
+    
+    $xpath = $::N->getSteps("$::gPlugin_name","Unregister");
+    assertOK($xpath,"Unregister");
+    assertEq("Unregister", $xpath->findvalue("//step[2]/stepName"), "step 2 is Unregister");
+};
+
+ntest "Eval VirtualBox Driver", {}, sub {
+    use ElectricCommander::PropMod;
+
+    # Load perl code from running Commander
+    ElectricCommander::PropMod::loadPerlCodeFromProperty($::N,"/projects/$::gPlugin_name/virtualbox_driver/VirtualBox");
+    my $gd = new VirtualBox();
+};
+
+ntest "poweron with required options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = '';
+    
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->poweron();
+    
+    my $expectedCommand = '"VBoxManage" --nologo startvm "TestVM"';
+    assertEq($expectedCommand, $command, 'poweron command');
+};
+
+ntest "poweron with all options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe';
+    $opts->{virtualbox_create_resource} = '1';
+    $opts->{virtualbox_workspace} = 'default';
+    $opts->{virtualbox_pools} = 'pools';
+            
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->poweron();
+    
+    my $expectedCommand = '"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" --nologo startvm "TestVM"';
+    assertEq($expectedCommand, $command, 'poweron command');
+};
+
+ntest "poweroff with required options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = '';
+    
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->poweroff();
+    
+    my $expectedCommand = '"VBoxManage" --nologo controlvm "TestVM" poweroff';
+    assertEq($expectedCommand, $command, 'poweroff command');
+};
+
+ntest "poweroff with all options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe';
+    $opts->{virtualbox_delete_resource} = '1';
+            
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->poweroff();
+    
+    my $expectedCommand = '"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" --nologo controlvm "TestVM" poweroff';
+    assertEq($expectedCommand, $command, 'poweroff command');
+};
+
+ntest "pause with required options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = '';
+    
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->pause();
+    
+    my $expectedCommand = '"VBoxManage" --nologo controlvm "TestVM" pause';
+    assertEq($expectedCommand, $command, 'pause command');
+};
+
+ntest "pause with all options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe';
+            
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->pause();
+    
+    my $expectedCommand = '"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" --nologo controlvm "TestVM" pause';
+    assertEq($expectedCommand, $command, 'pause command');
+};
+
+ntest "resume with required options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = '';
+    
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->resume();
+    
+    my $expectedCommand = '"VBoxManage" --nologo controlvm "TestVM" resume';
+    assertEq($expectedCommand, $command, 'resume command');
+};
+
+ntest "resume with all options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe';
+            
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->resume();
+    
+    my $expectedCommand = '"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" --nologo controlvm "TestVM" resume';
+    assertEq($expectedCommand, $command, 'resume command');
+};
+
+ntest "register with required options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmdefinition} = 'C:\TestVM.xml';
+    $opts->{vboxmanage_location} = '';
+    
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->register();
+    
+    my $expectedCommand = '"VBoxManage" --nologo registervm "C:\TestVM.xml"';
+    assertEq($expectedCommand, $command, 'register command');
+};
+
+ntest "register with all options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmdefinition} = 'C:\TestVM.xml';
+    $opts->{vboxmanage_location} = 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe';
+            
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->register();
+    
+    my $expectedCommand = '"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" --nologo registervm "C:\TestVM.xml"';
+    assertEq($expectedCommand, $command, 'register command');
+};
+
+ntest "unregister with required options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = '';
+    $opts->{virtualbox_delete_files} = '0';
+    
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->unregister();
+    
+    my $expectedCommand = '"VBoxManage" --nologo unregistervm "TestVM"';
+    assertEq($expectedCommand, $command, 'unregister command');
+};
+
+ntest "unregister with all options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe';
+    $opts->{virtualbox_delete_files} = '1';
+            
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->unregister();
+    
+    my $expectedCommand = '"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" --nologo unregistervm "TestVM" --delete';
+    assertEq($expectedCommand, $command, 'unregister command');
+};
+
+ntest "snapshot with required options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = '';
+    $opts->{virtualbox_snapshot} = 'TestSnapshot';
+    $opts->{vboxmanage_description} = '';
+    
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->snapshot();
+    
+    my $expectedCommand = '"VBoxManage" --nologo snapshot "TestVM" take "TestSnapshot"';
+    assertEq($expectedCommand, $command, 'snapshot command');
+};
+
+ntest "snapshot with all options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe';
+    $opts->{virtualbox_snapshot} = 'TestSnapshot';
+    $opts->{virtualbox_description} = 'This is a snapshot of TestVM';
+            
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->snapshot();
+    
+    my $expectedCommand = '"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" --nologo snapshot "TestVM" take "TestSnapshot" --description "This is a snapshot of TestVM"';
+    assertEq($expectedCommand, $command, 'snapshot command');
+};
+
+ntest "revert with required options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = '';
+    $opts->{virtualbox_snapshot} = 'TestSnapshot';
+    
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->revert();
+    
+    my $expectedCommand = '"VBoxManage" --nologo snapshot "TestVM" restore "TestSnapshot"';
+    assertEq($expectedCommand, $command, 'revert command');
+};
+
+ntest "revert with all options", {}, sub {
+    my $ec;
+    my $opts;
+    $opts->{virtualbox_vmname} = 'TestVM';
+    $opts->{vboxmanage_location} = 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe';
+    $opts->{virtualbox_snapshot} = 'TestSnapshot';
+            
+    my $gd = new VirtualBox($ec, $opts);
+    my $command = $gd->revert();
+    
+    my $expectedCommand = '"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" --nologo snapshot "TestVM" restore "TestSnapshot"';
+    assertEq($expectedCommand, $command, 'revert command');
+};
+
+1;

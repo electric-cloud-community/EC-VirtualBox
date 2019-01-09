@@ -1,0 +1,597 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="generator"
+          content="HTML Tidy for Windows (vers 25 March 2009), see www.w3.org" />
+    <meta content="text/html; charset=us-ascii"
+          http-equiv="content-type" />
+
+    <title>ElectricFlow Plugin for VirtualBox</title>
+    <link rel="stylesheet"
+          href="../../plugins/@PLUGIN_KEY@/pluginhelp.css"
+          type="text/css"
+          media="screen" />
+</head>
+
+<body>
+    <div class="help">
+        <h1 class="pluginname">VirtualBox</h1>
+
+        <p>Plugin Version @PLUGIN_VERSION@</p>
+        <hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;"
+            noshade="noshade" />
+
+		<p>July 1, 2015</p>	
+			
+        <p>The EC-VirtualBox plugin allows users to manage virtual
+        machines in VirtualBox. This plugin calls the VBoxManage
+        command line tool, which is included in the VirtualBox
+        package, to perform the following operations: PowerOn,
+        PowerOff, Pause, Resume, Register, Unregister, Snapshot,
+        and Revert.</p>
+
+        <h2>VirtualBox Links</h2>
+
+        <p>More information can be found at:</p>
+
+        <ul>
+            <li><a href="http://www.virtualbox.org/">VirtualBox
+            home page</a></li>
+
+            <li>
+            <a href="http://www.virtualbox.org/manual/ch08.html">VBoxManage
+            documentation</a></li>
+        </ul><br />
+        <br />
+
+        <h2>ElectricFlow Integration to VirtualBox</h2>
+
+        <p>@PLUGIN_KEY@ implements the most important actions that
+        can be performed on a virtual machine. It performs actions
+        on Virtual Machines like Pause, Power ON, Power Off,
+        Register, Resume, Revert, Snapshot and Unregister.</p>
+
+        <p>ElectricFlow itself provides some advantages like
+        parameters checking, easy functionality selection using
+        only check boxes, combo buttons, historical log reports,
+        procedure duration statistics, simple credentials
+        attachment, real time analysis of the log been generated,
+        among others.</p>
+
+        <h2>Integrated Version</h2>
+
+        <p>This plugin was developed and tested with VirtualBox
+        version 4.0.4.</p>
+
+        <h1>Plugin Procedures</h1>
+
+        <p>IMPORTANT: For all parameter descriptions below,
+        required parameters are shown in
+        <span class='required'>bold italics</span>.</p>
+
+        <div id="Pause">
+            <a name='Pause'
+                 id="Pause"></a> 
+
+            <h3>Pause</h3>
+
+            <p>Allows users to pause the specified virtual machine
+            in VirtualBox.</p>
+
+            <table class="grid">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+
+                        <th>Description</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>vboxmanage_location</td>
+
+                        <td>Provide the absolute path to the
+                        location of VBoxManage. Default value is
+                        'VBoxManage', which assumes that the
+                        VirtualBox directory is contained in the
+                        environment variable PATH.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_timeout</td>
+
+                        <td>Indicate the timeout for the step
+                        execution in minutes. Leave blank for no
+                        timeout.</td>
+                    </tr>
+
+                    <tr>
+                        <td class='required'>virtualbox_vmname</td>
+
+                        <td>Provide the name of the virtual machine
+                        to pause. (Required)</td>
+                    </tr>
+                </tbody>
+            </table><img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-8.png"
+             alt="form" />
+        </div>
+
+        <div id="PowerOff">
+            <a name='PowerOff'
+                 id="PowerOff"></a> 
+
+            <h3>PowerOff</h3>
+
+            <p>Allows users to power off the specified virtual
+            machine in VirtualBox and optionally delete the
+            ElectricFlow resource (if it exists) that is
+            associated with the virtual machine.</p>
+
+            <table class="grid">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+
+                        <th>Description</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>vboxmanage_location</td>
+
+                        <td>Provide the absolute path to the
+                        location of VBoxManage. Default value is
+                        'VBoxManage', which assumes that the
+                        VirtualBox directory is contained in the
+                        environment variable PATH.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_delete_resource</td>
+
+                        <td>If checked, this deletes the
+                        ElectricFlow resource associated with
+                        the virtual machine.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_timeout</td>
+
+                        <td>Indicate the timeout for the step
+                        execution in minutes. Leave blank for no
+                        timeout.</td>
+                    </tr>
+
+                    <tr>
+                        <td class='required'>virtualbox_vmname</td>
+
+                        <td>Provide the name of the virtual machine
+                        to pause. (Required)</td>
+                    </tr>
+                </tbody>
+            </table><img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-16.png"
+             alt="form" />
+        </div>
+
+        <div id="PowerOn">
+            <a name='PowerOn'
+                 id="PowerOn"></a> 
+
+            <h3>PowerOn</h3>
+
+            <p>Allows users to power on the specified virtual
+            machine in VirtualBox and optionally create an
+            ElectricFlow resource for the powered on virtual
+            machine.</p>
+
+            <table class="grid">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+
+                        <th>Description</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>vboxmanage_location</td>
+
+                        <td>Provide the absolute path to the
+                        location of VBoxManage. Default value is
+                        'VBoxManage', which assumes that the
+                        VirtualBox directory is contained in the
+                        environment variable PATH.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_create_resource</td>
+
+                        <td>If checked, this creates an
+                        ElectricFlow resource for the powered
+                        on virtual machine.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_pools</td>
+
+                        <td>Provide the ElectricFlow resource
+                        pool names to associate with the created
+                        resource.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_delete_resource</td>
+
+                        <td>If checked, this deletes the
+                        ElectricFlow resource associated with
+                        the virtual machine.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_timeout</td>
+
+                        <td>Indicate the timeout for the step
+                        execution in minutes. Leave blank for no
+                        timeout.</td>
+                    </tr>
+
+                    <tr>
+                        <td class='required'>virtualbox_vmname</td>
+
+                        <td>Provide the name of the virtual machine
+                        to pause. (Required)</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_workspace</td>
+
+                        <td>Provide the ElectricFlow workspace
+                        for the created resource to use.</td>
+                    </tr>
+                </tbody>
+            </table><img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-2.png"
+             alt="form" />
+        </div>
+
+        <div id="Register">
+            <a name='Register'
+                 id="Register"></a> 
+
+            <h3>Register</h3>
+
+            <p>Allows users to import a virtual machine definition
+            in an XML file into VirtualBox.</p>
+
+            <table class="grid">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+
+                        <th>Description</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>vboxmanage_location</td>
+
+                        <td>Provide the absolute path to the
+                        location of VBoxManage. Default value is
+                        'VBoxManage', which assumes that the
+                        VirtualBox directory is contained in the
+                        environment variable PATH.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_timeout</td>
+
+                        <td>Indicate the timeout for the step
+                        execution in minutes. Leave blank for no
+                        timeout.</td>
+                    </tr>
+
+                    <tr>
+                        <td class='required'>
+                        virtualbox_vmdefinition</td>
+
+                        <td>Provide the absolute path to the file
+                        that contains the virtual machine
+                        definition. (Required)</td>
+                    </tr>
+                </tbody>
+            </table><img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-14.png"
+             alt="form" />
+        </div>
+
+        <div id="Resume">
+            <a name='Resume'
+                 id="Resume"></a> 
+
+            <h3>Resume</h3>
+
+            <p>Allows users to resume the specified paused virtual
+            machine in VirtualBox.</p>
+
+            <table class="grid">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+
+                        <th>Description</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>vboxmanage_location</td>
+
+                        <td>Provide the absolute path to the
+                        location of VBoxManage. Default value is
+                        'VBoxManage', which assumes that the
+                        VirtualBox directory is contained in the
+                        environment variable PATH.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_timeout</td>
+
+                        <td>Indicate the timeout for the step
+                        execution in minutes. Leave blank for no
+                        timeout.</td>
+                    </tr>
+
+                    <tr>
+                        <td class='required'>virtualbox_vmname</td>
+
+                        <td>Provide the name of the virtual machine
+                        to pause. (Required)</td>
+                    </tr>
+                </tbody>
+            </table><img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-10.png"
+             alt="form" />
+        </div>
+
+        <div id="Revert">
+            <a name='Revert'
+                 id="Revert"></a> 
+
+            <h3>Revert</h3>
+
+            <p>Allows users to revert a virtual machine to the
+            specified snapshot.</p>
+
+            <table class="grid">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+
+                        <th>Description</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>vboxmanage_location</td>
+
+                        <td>Provide the absolute path to the
+                        location of VBoxManage. Default value is
+                        'VBoxManage', which assumes that the
+                        VirtualBox directory is contained in the
+                        environment variable PATH.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_snapshot</td>
+
+                        <td>Provide the name for the created
+                        snapshot.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_timeout</td>
+
+                        <td>Indicate the timeout for the step
+                        execution in minutes. Leave blank for no
+                        timeout.</td>
+                    </tr>
+
+                    <tr>
+                        <td class='required'>virtualbox_vmname</td>
+
+                        <td>Provide the name of the virtual machine
+                        to pause. (Required)</td>
+                    </tr>
+                </tbody>
+            </table><img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-6.png"
+             alt="form" />
+        </div>
+
+        <div id="Snapshot">
+            <a name='Snapshot'
+                 id="Snapshot"></a> 
+
+            <h3>Snapshot</h3>
+
+            <p>Allows users to create a snapshot of the specified
+            virtual machine.</p>
+
+            <table class="grid">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+
+                        <th>Description</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>vboxmanage_location</td>
+
+                        <td>Provide the absolute path to the
+                        location of VBoxManage. Default value is
+                        'VBoxManage', which assumes that the
+                        VirtualBox directory is contained in the
+                        environment variable PATH.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_description</td>
+
+                        <td>Provide a description for the created
+                        snapshot.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_snapshot</td>
+
+                        <td>Provide the name for the created
+                        snapshot.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_timeout</td>
+
+                        <td>Indicate the timeout for the step
+                        execution in minutes. Leave blank for no
+                        timeout.</td>
+                    </tr>
+
+                    <tr>
+                        <td class='required'>virtualbox_vmname</td>
+
+                        <td>Provide the name of the virtual machine
+                        to pause. (Required)</td>
+                    </tr>
+                </tbody>
+            </table><img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-4.png"
+             alt="form" />
+        </div>
+
+        <div id="Unregister">
+            <a name='Unregister'
+                 id="Unregister"></a> 
+
+            <h3>Unregister</h3>
+
+            <p>Allows users to unregister the specified virtual
+            machine from VirtualBox.</p>
+
+            <table class="grid">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+
+                        <th>Description</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>vboxmanage_location</td>
+
+                        <td>Provide the absolute path to the
+                        location of VBoxManage. Default value is
+                        'VBoxManage', which assumes that the
+                        VirtualBox directory is contained in the
+                        environment variable PATH.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_delete_files</td>
+
+                        <td>If checked, this deletes files
+                        associated with the virtual machine.</td>
+                    </tr>
+
+                    <tr>
+                        <td>virtualbox_timeout</td>
+
+                        <td>Indicate the timeout for the step
+                        execution in minutes. Leave blank for no
+                        timeout.</td>
+                    </tr>
+
+                    <tr>
+                        <td class='required'>virtualbox_vmname</td>
+
+                        <td>Provide the name of the virtual machine
+                        to pause. (Required)</td>
+                    </tr>
+                </tbody>
+            </table><img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-12.png"
+             alt="form" />
+        </div>
+        
+        <h1>Examples and Use Cases</h1>
+
+        <h2>Create an empty vm called "test"</h2>
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-1.png" alt="testvm" /> 
+
+        <h2>Create a procedure for powering on the machine called "test", run it and see the log</h2>
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-2.png" alt="form" /> 
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-3.png" alt="log" /> 
+
+        <h2>Create a procedure to create a snapshot of the "test" vm, run it and see the log</h2>
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-4.png" alt="form" /> 
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-5.png" alt="log" /> 
+        
+        <h2>Now Create a procedure to revert the test vm to the recently created snapshot called "test_snapshot".</h2>
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-6.png" alt="form" /> 
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-7.png" alt="log" /> 
+        
+        <h2>Now let's try to pause the "test" vm from the Pause procedure.</h2>
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-8.png" alt="form" /> 
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-9.png" alt="log" />
+        
+        <h2>Once the "test" vm is paused we will resume it with the Resume procedure</h2>
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-10.png" alt="form" /> 
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-11.png" alt="log" />
+        
+        <h2>Unregister the vm by creating a UnRegister procedure</h2>
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-12.png" alt="form" /> 
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-13.png" alt="log" />
+        
+        <h2>Once we have Unregistered the test machine it's time to register it again.</h2>
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-14.png" alt="form" /> 
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-15.png" alt="log" />
+        
+        <h2>Finally its time to shutdown the machine to finish the demo.</h2>
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-16.png" alt="form" /> 
+        <img src="../../plugins/@PLUGIN_KEY@/images/VirtualBox-17.png" alt="log" />
+
+        <h1>Release Notes</h1>
+		
+		<h2>@PLUGIN_KEY@-1.0.4</h2>
+
+        <ul>
+            <li>Renamed ElectricCommander to ElectricFlow.</li>
+     
+        </ul>
+
+        <h2>@PLUGIN_KEY@-1.0.3</h2>
+
+        <ul>
+            <li>Step picker chooser registration</li>
+            <li>Screenshots were added to the help page</li>
+        </ul>
+        
+        <h2>@PLUGIN_KEY@-1.0.2</h2>
+
+        <ul>
+            <li>Plugin converted into the new maven format.</li>
+        </ul>
+
+        <h2>@PLUGIN_KEY@-1.0.1</h2>
+
+        <ul>
+            <li>4.1 help page format ready.</li>
+        </ul>
+    </div>
+</body>
+</html>

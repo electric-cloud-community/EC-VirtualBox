@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <key>@PLUGIN_KEY@</key>
+    <version>@PLUGIN_VERSION@</version>
+    <label>@PLUGIN_KEY@</label>
+    <description>VirtualBox plugin</description>
+    <help>EC-VirtualBox_help.xml</help>
+    <author>Electric Cloud</author>
+    <authorUrl>http://www.electric-cloud.com/support</authorUrl>
+    <category>Resource Management</category>
+    <commander-version min="3.6"/>
+    <components>
+        <component name="configure">
+            <javascript>war/com.electriccloud.commander.plugins.EC_VirtualBox.configure/com.electriccloud.commander.plugins.EC_VirtualBox.configure.nocache.js</javascript>
+        </component>
+    </components>
+</plugin>
